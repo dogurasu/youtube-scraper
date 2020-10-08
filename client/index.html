@@ -13,9 +13,17 @@
         <script>
 
             function submitChannel() {
-                const channelValue = document.querySelector('.channel-input').value;
-                // send to server
-                
+                const channelURL = document.querySelector('.channel-input').value;
+                // send to server - we want to hit the 'post' route
+                fetch('http://localhost:3000/creators', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    // send a serialized object in the body; i.e. a string obj
+                    body: JSON.stringify({channelURL})
+                })
+
             }
 
             // used to add new elements to the document
@@ -33,22 +41,26 @@
                 return el;
             }
 
-            const creators = [
-                {name: 'Code Drip', img: 'https://'},
-                {name: 'Dave Lee', img: 'https://'},
-                {name: 'MKBHD', img: 'https://'}
-            ]
+            // async function that will fetch to our API
+            async function loadCreators() {
+                const res = await fetch('http://localhost:3000/creators');
+                // use the .json() method to extract the actual data
+                const creators = await res.json();
 
-            const ctr = document.querySelector('.container');
+                const ctr = document.querySelector('.container');
 
-            creators.forEach(creator => {
-                const card = newEl('div', {class: 'card'});
-                const title = newEl('h4', {innerText: creator.name});
-                const img = newEl('img', {src: creator.img});
-                card.appendChild(title);
-                card.appendChild(img);
-                ctr.appendChild(card);
-            })
+                creators.forEach(creator => {
+                    const card = newEl('div', {class: 'card'});
+                    const title = newEl('h4', {innerText: creator.name});
+                    const img = newEl('img', {src: creator.img});
+                    card.appendChild(title);
+                    card.appendChild(img);
+                    ctr.appendChild(card);
+                })
+            }
+
+            // call the function
+            loadCreators();
 
         </script>
         <style>
