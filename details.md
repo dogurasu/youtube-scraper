@@ -15,3 +15,12 @@ FrontEnd
  - Header, input + button
  - render "divs" from JSON
  - Will link our form to our API
+
+API plan
+ - 2 main routes: GET /creators and POST /creators
+
+Scraper
+ - just a function that takes URL as input
+ - Takes in URL to YouTube, Grabs Data, Outputs data to DB
+ - when scraper gets to YouTube, it'll see channel and # subscribers
+    - will grab Avatar URL and image and title of channel
