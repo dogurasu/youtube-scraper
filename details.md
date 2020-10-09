@@ -1,4 +1,4 @@
-Based on: https://www.youtube.com/watch?v=7FjhF6Hy9gY
+Based on: 8:20 https://www.youtube.com/watch?v=7FjhF6Hy9gY
 
 Application Flow
  - Front end (vanilla JS) sends a URL to an  API we build to add and retrieve data to/from our SQL database
@@ -24,3 +24,12 @@ Scraper
  - Takes in URL to YouTube, Grabs Data, Outputs data to DB
  - when scraper gets to YouTube, it'll see channel and # subscribers
     - will grab Avatar URL and image and title of channel
+
+Database
+ - mySQL table used to represent Creators(id, name, avatar, channelURL)
+ - CREATE TABLE creators(
+     id BIGSERIAL NOT NULL PRIMARY KEY,
+     name VARCHAR(50) NOT NULL,
+     avatar VARCHAR(500) NOT NULL,
+     channelURL VARCHAR(100) NOT NULL
+ );
