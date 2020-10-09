@@ -15,7 +15,7 @@
             function submitChannel() {
                 const channelURL = document.querySelector('.channel-input').value;
                 // send to server - we want to hit the 'post' route
-                fetch('http://localhost:3000/creators', {
+                fetch('http://localhost:3001/creators', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -23,7 +23,6 @@
                     // send a serialized object in the body; i.e. a string obj
                     body: JSON.stringify({channelURL})
                 })
-
             }
 
             // used to add new elements to the document
@@ -43,16 +42,19 @@
 
             // async function that will fetch to our API
             async function loadCreators() {
-                const res = await fetch('http://localhost:3000/creators');
+                const res = await fetch('http://localhost:3001/creators');
                 // use the .json() method to extract the actual data
                 const creators = await res.json();
+
+                console.log(creators);
 
                 const ctr = document.querySelector('.container');
 
                 creators.forEach(creator => {
                     const card = newEl('div', {class: 'card'});
                     const title = newEl('h4', {innerText: creator.name});
-                    const img = newEl('img', {src: creator.img});
+                    const img = newEl('img', {src: creator.avatar});
+                    img.style.width = '100px';
                     card.appendChild(title);
                     card.appendChild(img);
                     ctr.appendChild(card);
